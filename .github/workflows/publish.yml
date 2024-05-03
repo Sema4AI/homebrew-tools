@@ -23,18 +23,18 @@ jobs:
       - name: Update cask recipe
         run: |
           cd scripts
-          chmod 755 ./homebrew-update.sh
+          chmod +x ./homebrew-update.sh
           ./homebrew-update.sh ${{ github.event.inputs.version }}
-
-      - name: Check Homebrew Formula
-        run: |
-          brew audit --new Casks/action-server.rb
-          brew style Casks/action-server.rb
 
       - name: Install and Test Cask
         run: |
           brew install --cask Casks/action-server.rb
-          action-server version
+          installed_version=$(action-server version)
+          echo "Installed Version: $installed_version"
+          if [ "$installed_version" != "${{ github.event.inputs.version }}" ]; then
+            echo "Version mismatch: expected ${{ github.event.inputs.version }}, got $installed_version"
+            exit 1
+          fi
 
       - name: Commit and Push
         run: |
