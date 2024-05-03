@@ -1,33 +1,44 @@
-name: brew pr-pull
+name: Action Server manual Brew publish
 on:
-  pull_request_target:
-    types:
-      - labeled
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to upload'
+        required: true
+        default: 'x.x.x'
+
 jobs:
-  pr-pull:
-    if: contains(github.event.pull_request.labels.*.name, 'pr-pull')
-    runs-on: ubuntu-latest
+  action-server:
+    name: action-server
+    runs-on: macos-13
     steps:
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+      - name: main checkout
+        uses: actions/checkout@v4
 
-      - name: Set up git
-        uses: Homebrew/actions/git-user-config@master
+      - name: Set up Git
+        run: |
+          git config --global user.email "kari@robocorp.com"
+          git config --global user.name "kariharju"
 
-      - name: Pull bottles
-        env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
-          PULL_REQUEST: ${{ github.event.pull_request.number }}
-        run: brew pr-pull --debug --tap=$GITHUB_REPOSITORY $PULL_REQUEST
+      - name: Update cask recipe
+        run: |
+          cd scripts
+          ./homebrew-update.sh ${{ github.event.inputs.version }}
+          cd ../Casks
+          cat action-server.rb
 
-      - name: Push commits
-        uses: Homebrew/actions/git-try-push@master
-        with:
-          token: ${{ github.token }}
-          branch: main
+      - name: Check Homebrew Formula
+        run: |
+          brew audit --new-cask Casks/action-server.rb
+          brew style Casks/action-server.rb
 
-      - name: Delete branch
-        if: github.event.pull_request.head.repo.fork == false
-        env:
-          BRANCH: ${{ github.event.pull_request.head.ref }}
-        run: git push --delete origin $BRANCH
+      - name: Install and Test Cask
+        run: |
+          brew install --cask Casks/action-server.rb
+          action-server version
+
+      - name: Commit and Push
+        run: |
+          git add Casks/action-server.rb
+          git commit -m "Update Action Server to version ${{ github.event.inputs.version }}"
+          git push
