@@ -25,12 +25,10 @@ jobs:
           cd scripts
           chmod 755 ./homebrew-update.sh
           ./homebrew-update.sh ${{ github.event.inputs.version }}
-          cd ../Casks
-          cat action-server.rb
 
       - name: Check Homebrew Formula
         run: |
-          brew audit --new-cask Casks/action-server.rb
+          brew audit --new Casks/action-server.rb
           brew style Casks/action-server.rb
 
       - name: Install and Test Cask
