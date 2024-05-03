@@ -23,6 +23,7 @@ jobs:
       - name: Update cask recipe
         run: |
           cd scripts
+          chmod 755 ./homebrew-update.sh
           ./homebrew-update.sh ${{ github.event.inputs.version }}
           cd ../Casks
           cat action-server.rb
