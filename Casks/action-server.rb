@@ -1,6 +1,6 @@
 cask "action-server" do
-  version "0.21.0"
-  sha256 "71813168d68d93011e456fe898b8623518f478e5724589f5210e177a92720123"
+  version "0.22.0"
+  sha256 "df39341cb277634bf2d89449e2657906eef39920a806ee20930596b83eeb708d"
 
   # robocorp.com was verified as official when first introduced to the cask
   url "https://sema4.ai/cdn/downloads/action-server/releases/#{version}/macos64/action-server"
