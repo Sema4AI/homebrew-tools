@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 # Variables
 TEMPLATE_PATH="./recipe-template.txt"
 OUTPUT_PATH="../Casks/action-server.rb"
-LATEST_VERSION_URL="https://sema4.ai/cdn/downloads/action-server/releases/latest/version.txt"
+LATEST_VERSION_URL="https://cdn.sema4.ai/downloads/action-server/releases/latest/version.txt"
 
 # Check if version number is provided as an argument
 if [ "$#" -eq 0 ]; then
@@ -23,7 +23,7 @@ else
     exit 1
 fi
 
-DOWNLOAD_URL="https://sema4.ai/cdn/downloads/action-server/releases/${VERSION}/macos64/action-server"
+DOWNLOAD_URL="https://cdn.sema4.ai/downloads/action-server/releases/${VERSION}/macos64/action-server"
 
 # Fetch the latest binary and compute its SHA256 hash
 echo "Downloading the executable from ${DOWNLOAD_URL} to compute SHA256..."
