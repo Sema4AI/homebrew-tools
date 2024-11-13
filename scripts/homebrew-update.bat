@@ -9,7 +9,7 @@ cd /d "%~dp0"
 :: Set paths
 set TEMPLATE_PATH=recipe-template.txt
 set OUTPUT_PATH=..\Casks\action-server.rb
-set LATEST_VERSION_URL=https://cdn.sema4.ai/downloads/action-server/releases/latest/version.txt
+set LATEST_VERSION_URL=https://cdn.sema4.ai/action-server/releases/latest/version.txt
 
 :: Fetch latest version number if not provided
 if "%~1"=="" (
@@ -34,7 +34,7 @@ if "%~1"=="" (
     echo Version provided: %VERSION%
 )
 
-set DOWNLOAD_URL=https://cdn.sema4.ai/downloads/action-server/releases/%VERSION%/macos64/action-server
+set DOWNLOAD_URL=https://cdn.sema4.ai/action-server/releases/%VERSION%/macos64/action-server
 
 :: Download the executable and compute its SHA256 hash
 echo Downloading the executable from %DOWNLOAD_URL% to compute SHA256...
