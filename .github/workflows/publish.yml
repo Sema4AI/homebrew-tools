@@ -18,11 +18,14 @@ jobs:
       - name: main checkout
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
       - name: Update cask recipe
         run: |
-          cd scripts
-          chmod +x ./homebrew-update.sh
-          ./homebrew-update.sh ${{ github.event.inputs.version }}
+          python scripts/homebrew_update.py ${{ github.event.inputs.version }}
 
       - name: Install and Test Cask
         run: |
