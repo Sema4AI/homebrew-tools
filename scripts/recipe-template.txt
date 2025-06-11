@@ -11,7 +11,6 @@ cask "action-server" do
     url "https://cdn.sema4.ai/action-server/releases/#{version}/macos-arm64/action-server"
   end
 
-  # robocorp.com was verified as official when first introduced to the cask
   name "action-server"
   desc "Command line tool for running AI Actions on Sema4.ai Action Server."
   homepage "https://github.com/Sema4AI/actions"
