@@ -1,13 +1,13 @@
 cask "action-server" do
-  version "2.12.1"
+  version "2.13.0"
 
   on_intel do
-    sha256 "ba3132a2ff772904ac756341f8a0ad8549b1964434a0aec659115f9a8ef207a2"
+    sha256 "53ec4c862ef02dc406fdf4a9e9d7b46630b5385fe6e05e2cef15437167026a00"
     url "https://cdn.sema4.ai/action-server/releases/#{version}/macos64/action-server"
   end
 
   on_arm do
-    sha256 "ba47eaef6e00ff986c4e7c7bd4e5e89d27cdf01a6104c535dc92a72dc6111a85"
+    sha256 "a85a315d3c722542f840c8d7047eb75d9bacf104af09c2e9e50c7c8c2e39d541"
     url "https://cdn.sema4.ai/action-server/releases/#{version}/macos-arm64/action-server"
   end
 
