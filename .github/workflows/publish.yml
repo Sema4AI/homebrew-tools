@@ -29,8 +29,9 @@ jobs:
 
       - name: Install and Test Cask
         run: |
-          brew uninstall --cask sema4ai/tools/action-server || true
-          brew install --cask --force Casks/action-server.rb
+          brew update-reset
+          brew tap sema4ai/tools
+          brew install sema4ai/tools/action-server  
           installed_version=$(action-server version)
           echo "Installed Version: $installed_version"
           if [ "$installed_version" != "${{ github.event.inputs.version }}" ]; then
