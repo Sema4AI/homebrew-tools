@@ -29,6 +29,7 @@ jobs:
 
       - name: Install and Test Cask
         run: |
+          brew uninstall --cask action-server || true
           brew install --cask --force Casks/action-server.rb
           installed_version=$(action-server version)
           echo "Installed Version: $installed_version"
