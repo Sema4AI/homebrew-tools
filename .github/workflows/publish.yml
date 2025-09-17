@@ -27,6 +27,16 @@ jobs:
         run: |
           python scripts/homebrew_update.py ${{ github.event.inputs.version }}
 
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add Casks/action-server.rb
+          git commit -m "Update Action Server to version ${{ github.event.inputs.version }}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Using the GITHUB_TOKEN for authentication.
+      
       - name: Install and Test Cask
         run: |
           brew update-reset
@@ -38,13 +48,5 @@ jobs:
             echo "Version mismatch: expected ${{ github.event.inputs.version }}, got $installed_version"
             exit 1
           fi
-
-      - name: Commit and Push
-        run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'actions@github.com'
-          git add Casks/action-server.rb
-          git commit -m "Update Action Server to version ${{ github.event.inputs.version }}"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Using the GITHUB_TOKEN for authentication.
+  
+  
