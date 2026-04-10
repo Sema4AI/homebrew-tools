@@ -1,15 +1,10 @@
 cask "action-server" do
   version "#VERSION#"
 
-  on_intel do
-    sha256 "#HASH#"
-    url "https://cdn.sema4.ai/action-server/releases/#{version}/macos64/action-server"
-  end
+  sha256 "#HASH_ARM64#"
+  url "https://cdn.sema4.ai/action-server/releases/#{version}/macos-arm64/action-server"
 
-  on_arm do
-    sha256 "#HASH_ARM64#"
-    url "https://cdn.sema4.ai/action-server/releases/#{version}/macos-arm64/action-server"
-  end
+  depends_on arch: :arm64
 
   name "action-server"
   desc "Command line tool for running AI Actions on Sema4.ai Action Server."

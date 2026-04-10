@@ -42,10 +42,10 @@ def compute_sha256_from_url(url):
         sys.exit(2)
 
 
-def update_cask(version, sha256, sha256_arm64):
+def update_cask(version, sha256_arm64):
     print("Updating cask based on template...")
     template_content = TEMPLATE_PATH.read_text(encoding="utf-8")
-    updated_content = template_content.replace("#VERSION#", version).replace("#HASH#", sha256).replace("#HASH_ARM64#", sha256_arm64)
+    updated_content = template_content.replace("#VERSION#", version).replace("#HASH_ARM64#", sha256_arm64)
     CASK_PATH.write_text(updated_content, encoding="utf-8")
     print(f"Updated cask written to {CASK_PATH}:")
     print(updated_content)
@@ -60,11 +60,9 @@ def main():
         print("Usage: python homebrew_update.py [<version>]")
         sys.exit(1)
 
-    architectures = ['macos64', 'macos-arm64']
-    urls = [f"https://cdn.sema4.ai/action-server/releases/{version}/{arch}/action-server" for arch in architectures]
-    
-    sha256s = [compute_sha256_from_url(url) for url in urls]
-    update_cask(version, sha256s[0], sha256s[1])
+    url = f"https://cdn.sema4.ai/action-server/releases/{version}/macos-arm64/action-server"
+    sha256_arm64 = compute_sha256_from_url(url)
+    update_cask(version, sha256_arm64)
 
 
 if __name__ == "__main__":
