@@ -1,7 +1,7 @@
 cask "action-server" do
-  version "2.17.1"
+  version "3.2.0"
 
-  sha256 "0523f5ba2a0f884dadf728ade9a3fd5489137014ba7e2760a91bfbd5bfa83c37"
+  sha256 "fedf9928b4d32286e0bed1d1326b094db02941da59317fd13d68aae88f702d3c"
   url "https://cdn.sema4.ai/action-server/releases/#{version}/macos-arm64/action-server"
 
   depends_on arch: :arm64
