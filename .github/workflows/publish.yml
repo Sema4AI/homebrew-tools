@@ -11,7 +11,7 @@ on:
 jobs:
   action-server:
     name: action-server
-    runs-on: macos-13
+    runs-on: macos-26
     permissions:
       contents: write  # Ensuring the job has permission to write to the repository.
     steps:
